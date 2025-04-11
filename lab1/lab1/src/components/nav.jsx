@@ -15,6 +15,9 @@ export default function Nav(props) {
           <li>
             <a href="/">Menu</a>
           </li>
+          <li>
+            <a href="/admin">Admin</a>
+          </li>
         </ul>
       </div>
 

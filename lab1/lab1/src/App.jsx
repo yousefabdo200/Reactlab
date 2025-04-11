@@ -6,6 +6,8 @@ import Menu from './components/menu';
 import Categorie from './components/categorie';
 import { BrowserRouter, Routes, Route } from "react-router";
 import Search from './components/search';
+import Admin from './components/admin';
+
 import axios from 'axios';
 
 function App() {
@@ -69,14 +71,6 @@ function App() {
     setPrice((p) => p - newItems[i].price);
   };
 
-  const handleDelete = (id) => {
-    const itemToDelete = items.find((item) => item.id === id);
-    setCount((prevCount) => prevCount - itemToDelete.count);
-    setPrice((prevPrice) => prevPrice - itemToDelete.count * itemToDelete.price);
-    const newItems = items.filter((item) => item.id !== id);
-    setItems(newItems);
-  };
-
   const handleReset = () => {
     const newItems = items.map((item) => ({ ...item, count: 0 }));
     setItems(newItems);
@@ -101,10 +95,12 @@ function App() {
     const addedItem = items.find(item => item.id === id);
     setPrice((prev) => prev + (addedItem?.price || 0));
   };
+
   const handleCategoryClick = (categoryId) => {
     const filtered = items.filter(item => item.categoryId == categoryId);
     setFilteredItems(filtered);
   };
+
   const handleSearch = (term) => {
     if (!term) {
       setFilteredItems([]);
@@ -115,6 +111,32 @@ function App() {
       setFilteredItems(filtered);
     }
   };
+
+  const handleDelete = (id) => {
+    axios.delete(`http://localhost:5000/menu/${id}`)
+      .then(() => {
+        const newItems = items.filter((item) => item.id !== id);
+        setItems(newItems);
+
+        const deletedItem = items.find((item) => item.id === id);
+        setCount((prevCount) => prevCount - deletedItem.count);
+        setPrice((prevPrice) => prevPrice - deletedItem.count * deletedItem.price);
+      })
+      .catch((error) => {
+        console.error("Error deleting item:", error);
+      });
+  };
+
+  const handelInsert = (newItem) => {
+    axios.post("http://localhost:5000/menu", newItem)
+      .then(({ data }) => {
+        setItems((prevItems) => [...prevItems, data]);
+      })
+      .catch((error) => {
+        console.error("Error inserting item:", error);
+      });
+  };
+
   return (
     <>
       <Nav totalCount={count} totalPrice={price} />
@@ -143,7 +165,19 @@ function App() {
             <>
               <Search onSearch={handleSearch} />
               <Categorie items={categores} handleCategoryClick={handleCategoryClick} />
-              <Menu items={filteredItems.length > 0 ? filteredItems : items}  handelAddToCart={handelAddToCart} />
+              <Menu items={filteredItems.length > 0 ? filteredItems : items} handelAddToCart={handelAddToCart} />
+            </>
+          }
+        />
+        <Route
+          path="/admin"
+          element={
+            <>
+              <Admin
+                items={items}
+                handelDelete={handleDelete}
+                handelInsert={handelInsert}
+              />
             </>
           }
         />
