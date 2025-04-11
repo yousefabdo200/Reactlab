@@ -1,0 +1,99 @@
+{
+    "categories": [
+      {
+        "id": 1,
+        "name": "Meat"
+      },
+      {
+        "id": 2,
+        "name": "Drinks"
+      },
+      {
+        "id": 3,
+        "name": "Sides"
+      }
+    ],
+    "menu": [
+      {
+        "id": 1,
+        "price": 50,
+        "name": "Burger",
+        "count": 0,
+        "isInCart": false,
+        "categoryId": 1
+      },
+      {
+        "id": 2,
+        "price": 10,
+        "name": "Water",
+        "count": 0,
+        "isInCart": false,
+        "categoryId": 2
+      },
+      {
+        "id": 3,
+        "price": 25,
+        "name": "Potato",
+        "count": 0,
+        "isInCart": false,
+        "categoryId": 3
+      },
+      {
+        "id": 4,
+        "price": 30,
+        "name": "Soda",
+        "count": 0,
+        "isInCart": false,
+        "categoryId": 2
+      },
+      {
+        "id": 5,
+        "price": 40,
+        "name": "Pizza",
+        "count": 0,
+        "isInCart": false,
+        "categoryId": 1
+      },
+      {
+        "id": 6,
+        "price": 20,
+        "name": "Salad",
+        "count": 0,
+        "isInCart": false,
+        "categoryId": 3
+      },
+      {
+        "id": 7,
+        "price": 15,
+        "name": "Juice",
+        "count": 0,
+        "isInCart": false,
+        "categoryId": 2
+      },
+      {
+        "id": 8,
+        "price": 60,
+        "name": "Steak",
+        "count": 0,
+        "isInCart": true,
+        "categoryId": 1
+      },
+      {
+        "id": 9,
+        "price": 12,
+        "name": "Fries",
+        "count": 0,
+        "isInCart": false,
+        "categoryId": 3
+      },
+      {
+        "id": 10,
+        "price": 100,
+        "name": "Chicken Wings",
+        "count": 1,
+        "isInCart": true,
+        "categoryId": 1
+      }
+    ]
+  }
+  
